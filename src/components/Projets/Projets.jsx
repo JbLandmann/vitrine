@@ -12,15 +12,15 @@ const Projets = ({ enableScrollAnimation = false }) => {
   const projects = [
     {
       id: 1,
-      title: 'Tresors Nomade',
-      description: 'Un coin pour présenter ses tresors et leur histoire',
-      img: `${import.meta.env.BASE_URL}tresors-nomade2.png`,
+      title: 'Trésors Nomade',
+      description: 'Une vitrine pour présenter ses trésors et leur histoire',
+      img: `${import.meta.env.BASE_URL}bg-map-plan.avif`,
       lien: "https://tresors-nomade.web.app"
     },
     {
       id: 2,
       title: 'FluteCraft',
-      description: 'Une page web pour fabriquer vous meme la flute de vos rêves',
+      description: 'Une page web pour fabriquer vous même la flute de vos rêves',
       imageColor: '#667eea',
       lien:"#"
     },

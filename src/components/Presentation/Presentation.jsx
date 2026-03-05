@@ -41,7 +41,7 @@ const Presentation = () => {
               </div>
 
               <ul className="card-traits">
-                <li>Site web perso ou application légère</li>
+                <li>Site web ou application mobile</li>
                 <li>Architecture evolutive</li>
                 <li>Intégration de service (API)</li>
                 <li>+3h d'assistance</li>

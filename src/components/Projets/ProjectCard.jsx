@@ -1,13 +1,13 @@
 const ProjectCard = ({ title, description, img, lien }) => {
   return (
     <div className="project-card">
-      <div className="card-background" >
+      <a className="card-background" href={lien} target="blank">
         <img
           src={img}
           alt={title}
           className="project-card-image"
         />
-      </div>
+      </a>
       <div className="project-card-content">
         <h3 className="project-card-title">{title}</h3>
         <p className="project-card-description">{description}</p>

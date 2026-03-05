@@ -8,6 +8,7 @@ function App() {
 
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId)
+    gsap.ScrollTrigger.refresh()
     if (section) {
       section.scrollIntoView({
         behavior: 'smooth',

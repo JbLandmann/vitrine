@@ -58,6 +58,7 @@ const StickySections = ({ onSectionChange }) => {
                 scrub: 1,
                 pin: section,
                 pinSpacing: false,
+                markers: true,
                 id: `section-${i}`,
               }
             })

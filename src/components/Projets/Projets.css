@@ -78,9 +78,18 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-size: cover;
+  /* background-size: cover;
   background-position: center center;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */
+  overflow: hidden;
+
+  img {
+    transform: scale(1);
+    transition: transform .4s ease;
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
 }
 
 .card-background::after {
@@ -102,7 +111,7 @@
   object-position: top left;
   position: relative;
   z-index: 0;
-  filter: blur(2px);
+  /* filter: blur(2px); */
 }
 
 .project-card-content {
