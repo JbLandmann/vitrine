@@ -1,13 +1,10 @@
 const NavItem = ({ id, label, icon, isActive, onClick }) => {
-
-  const handleClick = () => {
-    gsap.ScrollTrigger.refresh()
-  }
-
-  /* const handleClick = (e) => {
+  const handleClick = (e) => {
     e.preventDefault()
-    onClick()
-  } */
+    if (onClick) {
+      onClick()
+    }
+  }
 
   return (
     <a

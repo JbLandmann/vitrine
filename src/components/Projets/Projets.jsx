@@ -1,14 +1,15 @@
-import { useEffect } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import Section from '../Section/Section'
 import ProjectCard from './ProjectCard'
 import './Projets.css'
 
-gsap.registerPlugin(ScrollTrigger)
+const Projets = () => {
+  const [isMobile, setIsMobile] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isFocused, setIsFocused] = useState(false)
+  const touchStartX = useRef(0)
+  const focusTimer = useRef(null)
 
-const navbarHeight = 100
-const Projets = ({ enableScrollAnimation = false }) => {
   const projects = [
     {
       id: 1,
@@ -30,151 +31,168 @@ const Projets = ({ enableScrollAnimation = false }) => {
       description: "Un regroupement d'informations graphiques pour la france métropolitaine",
       imageColor: '#764ba2',
       lien:"#"
+    },
+    {
+      id: 4,
+      title: "Test",
+      description: "Juste un test",
+      imageColor: '#764ba2',
+      lien:"#"
     }
   ]
 
+  const total = projects.length
+  const visibleCount = isMobile ? 1 : 3
+  const maxIndex = Math.max(0, total - visibleCount)
+  const canGoPrev = activeIndex > 0
+  const canGoNext = activeIndex < maxIndex
+  const canNavigate = total > visibleCount
+
+  // Responsive detection
   useEffect(() => {
-    if (!enableScrollAnimation) return
+    const mq = window.matchMedia('(max-width: 768px)')
+    const onChange = (e) => setIsMobile(e.matches)
+    setIsMobile(mq.matches)
+    mq.addEventListener('change', onChange)
+    return () => mq.removeEventListener('change', onChange)
+  }, [])
 
-    const section = document.getElementById('projets')
-    if (!section) return
+  // Clamp activeIndex when switching mobile/desktop
+  useEffect(() => {
+    setActiveIndex((prev) => Math.min(prev, maxIndex))
+  }, [maxIndex])
 
-    const isMobile = window.innerWidth <= 768
+  // Timer 0.6s pour déclencher l'animation hover (mobile uniquement)
+  useEffect(() => {
+    if (!isMobile) return
+    setIsFocused(false)
+    focusTimer.current = setTimeout(() => setIsFocused(true), 600)
+    return () => clearTimeout(focusTimer.current)
+  }, [activeIndex, isMobile])
 
-    // Timeline d'animation progressive
-    const title = section.querySelector('h2')
-    const cardsContainer = section.querySelector('.project-cards')
-    const cards = section.querySelectorAll('.project-card')
+  const goPrev = useCallback(() => {
+    setActiveIndex((prev) => Math.max(0, prev - 1))
+  }, [])
 
-    if (isMobile) {
-      // Sur mobile : pin en bas, cards qui se remplacent une par une
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: `+=${cards.length * 60}%`,
-        pin: true,
-        pinSpacing: true,
-        id: 'projets-pin',
-      })
+  const goNext = useCallback(() => {
+    setActiveIndex((prev) => Math.min(maxIndex, prev + 1))
+  }, [maxIndex])
 
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: section,
-          start: 'top 15%',
-          end: `+=${cards.length * 50}%`,
-          scrub: 1,
-          snap: {
-            snapTo: 1 / (cards.length + 1), // Snap entre chaque card
-            duration: 0.5,
-            ease: 'power2.inOut',
-          },
-          id: 'projets-timeline',
-        },
-      })
+  // Touch handlers (mobile)
+  const handleTouchStart = useCallback((e) => {
+    touchStartX.current = e.touches[0].clientX
+  }, [])
 
-      // Animation du titre
-      tl.fromTo(title, {
-        opacity: 0,
-        y: -30,
-      }, {
-        opacity: 1,
-        y: 0,
-      }, 0) // Position 0 : début
+  const handleTouchEnd = useCallback((e) => {
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (delta > 50 && canGoNext) goNext()
+    else if (delta < -50 && canGoPrev) goPrev()
+  }, [canGoNext, canGoPrev, goNext, goPrev])
 
-      let currentTime = 1 // Début après le titre
+  const getCardInfo = useCallback((index) => {
+    const firstVisible = activeIndex
+    const lastVisible = activeIndex + visibleCount - 1
 
-      // Ajouter chaque card à la timeline
-      cards.forEach((card, index) => {
-        // position initiale
-        gsap.set(card, {
-          position: 'absolute',
-          top: `${index * 2}%`,
-          transform: 'translate(-50%, -50%)',
-          zIndex: index,
-        })
-
-        // Apparition depuis la gauche à une position absolue dans la timeline
-        tl.fromTo(card, {
-          x: '-100%',
-          opacity: 0,
-        }, {
-          x: `-${index * 2}%`,
-          opacity: 1,
-          duration: 1, // Durée fixe pour chaque animation
-        }, currentTime) // Position absolue dans la timeline
-
-        currentTime += 1 // Passer à la prochaine position après la fin de cette animation
-      })
-    } else {
-      // Sur desktop : animation normale
-      ScrollTrigger.create({
-        trigger: section,
-        start: 'top top',
-        end: '+=130%',
-        pin: true,
-        pinSpacing: true,
-        id: 'projets-pin',
-      })
-
-      if (title && cardsContainer) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 15%',
-            end: '+=70%',
-            scrub: 1,
-            id: 'projets-timeline',
-          },
-        })
-
-        tl.fromTo(title, {
-          opacity: 0,
-          y: -30,
-        }, {
-          opacity: 1,
-          y: 0,
-          duration: 0.1,
-        })
-          .fromTo(cardsContainer, {
-            x: '-100%',
-            opacity: 0,
-          }, {
-            x: '0%',
-            opacity: 1,
-            duration: 0.7,
-          })
+    // Card is in the visible window
+    if (index >= firstVisible && index <= lastVisible) {
+      const posInWindow = index - firstVisible
+      const centerOffset = Math.floor(visibleCount / 2)
+      const offset = posInWindow - centerOffset
+      let cls = 'carousel-active'
+      if (isMobile && posInWindow === 0 && isFocused) {
+        cls += ' carousel-focused'
       }
+      return { className: cls, offset }
     }
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => {
-        if (trigger.vars.id && trigger.vars.id.startsWith('projets-')) {
-          trigger.kill()
-        }
-      })
+    // Card just before visible window — peek behind left
+    if (index === firstVisible - 1) {
+      const centerOffset = Math.floor(visibleCount / 2)
+      return { className: 'carousel-prev', offset: -(centerOffset + 1) }
     }
-  }, [enableScrollAnimation])
+
+    // Card just after visible window — peek behind right
+    if (index === lastVisible + 1) {
+      const centerOffset = Math.floor(visibleCount / 2)
+      return { className: 'carousel-next', offset: centerOffset + 1 }
+    }
+
+    // Far away — hidden
+    return { className: 'carousel-hidden', offset: 0 }
+  }, [activeIndex, visibleCount, isMobile, isFocused])
+
+  const getCardStyle = useCallback((index) => {
+    const { offset } = getCardInfo(index)
+    if (isMobile) {
+      return { '--carousel-x': `${offset * 85}%` }
+    }
+    return { '--carousel-x': `calc(${offset} * (100% + 2rem))` }
+  }, [getCardInfo, isMobile])
 
   return (
-    <Section id="projets" className="projets-section" enableScrollAnimation={enableScrollAnimation}>
+    <Section id="projets" className="projets-section">
       <div className="projets-background"></div>
       <div className="projets-container">
         <h2>Creations</h2>
 
-        <div className="project-cards">
-          {projects.map(project => (
-            <ProjectCard
-              key={project.id}
-              title={project.title}
-              description={project.description}
-              imageColor={project.imageColor}
-              imageText={project.imageText}
-              img={project.img}
-              lien={project.lien}
-              zIndex={project.id + 1}
-            />
-          ))}
+        <div
+          className="carousel-wrapper"
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <div className="carousel-track">
+            {projects.map((project, index) => (
+              <ProjectCard
+                key={project.id}
+                title={project.title}
+                description={project.description}
+                imageColor={project.imageColor}
+                imageText={project.imageText}
+                img={project.img}
+                lien={project.lien}
+                className={getCardInfo(index).className}
+                style={getCardStyle(index)}
+              />
+            ))}
+          </div>
         </div>
+
+        {canNavigate && (
+          <div className="carousel-nav">
+            <button
+              className="carousel-arrow carousel-arrow-prev"
+              onClick={goPrev}
+              disabled={!canGoPrev}
+              aria-label="Projet précédent"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+
+            <div className="carousel-dots">
+              {Array.from({ length: maxIndex + 1 }, (_, i) => (
+                <button
+                  key={i}
+                  className={`carousel-dot${i === activeIndex ? ' active' : ''}`}
+                  onClick={() => setActiveIndex(i)}
+                  aria-label={`Position ${i + 1}`}
+                />
+              ))}
+            </div>
+
+            <button
+              className="carousel-arrow carousel-arrow-next"
+              onClick={goNext}
+              disabled={!canGoNext}
+              aria-label="Projet suivant"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
     </Section>
   )

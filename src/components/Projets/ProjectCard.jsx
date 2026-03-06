@@ -1,6 +1,6 @@
-const ProjectCard = ({ title, description, img, lien }) => {
+const ProjectCard = ({ title, description, img, lien, className = '', style }) => {
   return (
-    <div className="project-card">
+    <div className={`project-card ${className}`.trim()} style={style}>
       <a className="card-background" href={lien} target="blank">
         <img
           src={img}

@@ -34,42 +34,139 @@
   margin: 0;
 }
 
-.project-cards {
-  display: flex;
-  justify-content: center;
-  align-items: stretch;
-  margin-top: 3rem;
-  padding: 0 1rem;
-  gap: 2rem;
+/* ====== Carousel (all sizes) ====== */
+.carousel-wrapper {
   position: relative;
-  /* overflow: hidden; */
+  width: 100%;
+  height: 65vh;
+  margin-top: 3rem;
+  overflow: visible;
+  user-select: none;
+}
+
+.carousel-track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
 }
 
 .project-card {
   background: white;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.08),
     0 1px 4px rgba(0, 0, 0, 0.04);
-  transition: all 0.3s ease;
-  width: 350px;
-  height: 65vh;
-  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 
-.project-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 
+.carousel-wrapper .project-card {
+  position: absolute;
+  width: 350px;
+  height: 65vh;
+  transform:
+    translateX(var(--carousel-x, 0))
+    translateY(var(--carousel-y, 0))
+    scale(var(--carousel-scale, 1));
+  transition: transform 0.4s ease, opacity 0.4s ease, box-shadow 0.4s ease;
+}
+
+/* Active cards */
+.carousel-wrapper .project-card.carousel-active {
+  --carousel-scale: 1;
+  opacity: 1;
+  z-index: 3;
+}
+
+/* Hover on active cards — zoom image stays on CSS :hover */
+.carousel-wrapper .project-card.carousel-active:hover {
+  --carousel-y: -5px;
+  box-shadow:
     0 8px 20px rgba(0, 0, 0, 0.12),
     0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
-.project-card:hover .project-card-image {
+.carousel-wrapper .project-card.carousel-active:hover .project-card-image {
   filter: none;
+}
+
+/* Adjacent cards (prev / next) — peek behind with edge visible */
+.carousel-wrapper .project-card.carousel-prev,
+.carousel-wrapper .project-card.carousel-next {
+  --carousel-scale: 0.92;
+  opacity: 0.5;
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Hidden cards — fade out so movement is invisible */
+.carousel-wrapper .project-card.carousel-hidden {
+  --carousel-scale: 0.85;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ====== Navigation: arrows + dots (below carousel) ====== */
+.carousel-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.2rem;
+  z-index: 10;
+}
+
+.carousel-arrow {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1.5px solid rgba(150, 150, 150, 0.5);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #333;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-arrow:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 1);
+  transform: scale(1.08);
+}
+
+.carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.carousel-dot {
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid rgba(100, 100, 100, 0.5);
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.carousel-dot.active {
+  background: rgba(80, 80, 80, 0.8);
+  border-color: rgba(80, 80, 80, 0.8);
 }
 
 .card-background {
@@ -155,27 +252,63 @@
   display: block;
 }
 
+/* ====== Mobile overrides ====== */
 @media (max-width: 768px) {
-  .project-cards {
-    flex-direction: column;
-    gap: 2rem;
-    align-items: center;
-    position: relative;
-    height: 500px;
-  }
-  
-  .project-card {
-    width: 100%;
-    max-width: 400px;
+  .carousel-wrapper {
+    margin-top: 2rem;
+    touch-action: pan-y;
   }
 
-  .project-card-image {
+  .carousel-wrapper .project-card {
+    width: min(350px, 70vw);
+    height: 60vh;
+  }
+
+  .carousel-arrow {
+    display: none;
+  }
+
+  .carousel-dot {
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .carousel-dot.active {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(255, 255, 255, 0.9);
+  }
+
+  /* Focus animation (mobile only, after 0.6s) */
+  .carousel-wrapper .project-card.carousel-focused {
+    --carousel-y: -5px;
+    --carousel-scale: 1;
+    box-shadow:
+      0 8px 20px rgba(0, 0, 0, 0.12),
+      0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  .carousel-wrapper .project-card.carousel-focused .project-card-image {
     filter: none;
+  }
+
+  .carousel-wrapper .project-card.carousel-focused .card-background img {
+    transform: scale(1.2);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .project-card {
+    transition: none;
+  }
+
+  .carousel-wrapper .project-card {
+    transition: none;
+  }
+
+  .carousel-dot {
+    transition: none;
+  }
+
+  .carousel-arrow {
     transition: none;
   }
 }
