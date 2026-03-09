@@ -30,7 +30,7 @@ function App() {
         activeSection={activeSection}
         onNavigate={scrollToSection}
       />
-      <StickySections onSectionChange={setActiveSection} />
+      <StickySections onSectionChange={setActiveSection} scrollToSection={scrollToSection} />
     </>
   )
 }

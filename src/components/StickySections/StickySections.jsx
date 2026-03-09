@@ -3,16 +3,18 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import Presentation from '../Presentation/Presentation'
+import Services from '../Services/Services'
 import Projets from '../Projets/Projets'
 import Contact from '../Contact/Contact'
 import './StickySections.css'
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
-const StickySections = ({ onSectionChange }) => {
+const StickySections = ({ onSectionChange, scrollToSection }) => {
   const wrapperRef = useRef(null)
   const contentRef = useRef(null)
   const smootherRef = useRef(null)
+  const bgRef = useRef(null)
 
   useEffect(() => {
     gsap.ticker.lagSmoothing(1000, 16)
@@ -30,8 +32,21 @@ const StickySections = ({ onSectionChange }) => {
       const isMobile = window.innerWidth <= 768
 
       // =============================================
-      // FOLD-AWAY removed — standard scroll, no animation
+      // BACKGROUND : défilement horizontal prononcé
       // =============================================
+      if (bgRef.current) {
+        gsap.to(bgRef.current, {
+          x: '-30vw',
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapperRef.current,
+            start: 'top top',
+            end: 'bottom bottom',
+            scrub: 1,
+            id: 'bg-horizontal',
+          }
+        })
+      }
 
       // =============================================
       // PROJETS : animation interne (titre + cartes)
@@ -124,8 +139,10 @@ const StickySections = ({ onSectionChange }) => {
 
   return (
     <div ref={wrapperRef} className="sticky-sections-wrapper">
+      <div ref={bgRef} className="page-background" />
       <div ref={contentRef} className="sticky-sections">
-        <Presentation />
+        <Presentation scrollToSection={scrollToSection} />
+        <Services />
         <Projets />
         <Contact />
       </div>

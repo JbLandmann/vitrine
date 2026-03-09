@@ -1,158 +1,207 @@
+/* =============================================
+   HERO / PRESENTATION SECTION
+   ============================================= */
+
 .presentation-section {
   position: relative;
   overflow: hidden;
 }
 
-.presentation-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: 
-    linear-gradient(to bottom, rgba(28, 42, 68, 0.3) 0%, rgba(13, 28, 65, 0.85) 100%),
-    url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=2400&q=80");
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
-  z-index: 0;
-}
-
-.presentation-container {
+.hero-container {
   position: relative;
   z-index: 1;
-  max-width: 1200px;
+  max-width: 1100px;
   width: 100%;
   margin: 0 auto;
-  padding: 0 2rem;
-  flex: 1;
-}
-
-.presentation-section h2 {
-  position: relative;
-  z-index: 1;
-  color: white;
-  padding-top: 2rem;
-  font-size: 2rem;
-  margin: 0;
-}
-
-.presentation-section .subtitle {
-  position: relative;
-  z-index: 1;
-  color: white;
-}
-
-.presentation-rows {
-  position: relative;
-  z-index: 1;
-}
-
-.presentation-rows {
+  padding: 4rem 2rem 3rem;
   display: flex;
-  gap: 2rem;
-  margin-top: 3rem;
-  align-items: center;
   flex-direction: column;
+  gap: 2.5rem;
 }
 
-.presentation-content {
-  flex: 1;
-  background-color: rgba(0, 0, 0, 0.5);
-  padding: 2rem;
+/* --- Catchphrase --- */
+
+.hero-catchphrase {
+  color: white !important;
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  text-align: left;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5);
 }
 
-.presentation-text {
-  color: white;
-  font-size: 1.1rem;
-  line-height: 1.8;
+/* --- Features grid --- */
+
+.hero-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.hero-feature {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.hero-icon {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  color: rgba(255, 255, 255, 0.9);
+  margin-top: 2px;
+}
+
+.hero-feature p {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.15rem;
+  line-height: 1.7;
   margin: 0;
   text-align: left;
 }
 
-.presentation-offers {
-  flex: 1;
+/* --- CTA Block (full width) --- */
+
+.hero-cta-block {
   display: flex;
   flex-direction: row;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 1rem;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  padding: 1.5rem 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.offer-card {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 1.5rem;
-  flex: 1;
-  min-width: 250px;
-}
-
-.offer-card h3 {
-  color: white;
-  font-size: 1.3rem;
-  margin: 0 0 0.8rem 0;
-  font-weight: 600;
-}
-
-.offer-card p {
+.hero-icon-cta {
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
   color: rgba(255, 255, 255, 0.9);
-  font-size: 0.95rem;
-  line-height: 1.6;
+}
+
+.hero-cta-text {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 1.15rem;
+  line-height: 1.7;
   margin: 0;
+  text-align: left;
+  flex: 1;
 }
 
-.offer-card ul {
-  list-style: none;
-  padding: 0;
-  margin: 1rem 0;
-  color: white;
+.hero-cta-buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.75rem;
+  flex-shrink: 0;
 }
 
-.offer-card li {
-  padding: 0.25rem 0;
-  color: rgba(255, 255, 255, 0.9);
+.btn-hero {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #1a1a1a;
+  background: #c8a84e;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
-.card-head {
-  padding: 0.5rem;
-  background-color: rgba(90, 179, 50, 0.6);
+.btn-hero:hover {
+  background: #d4b85c;
+  box-shadow: 0 4px 18px rgba(200, 168, 78, 0.45);
+  transform: translateY(-2px);
 }
 
-.offer-1 {
-  background-color: rgba(90, 179, 50, 0.6);
+.btn-hero:active {
+  transform: translateY(0);
 }
 
-.offer-2 {
-  background-color: rgba(50, 121, 179, 0.6);
-}
+/* =============================================
+   RESPONSIVE
+   ============================================= */
 
-.offer-3 {
-  background-color: rgba(117, 50, 179, 0.6);
-}
-
-@media (max-width: 968px) {
+@media (max-width: 768px) {
   .presentation-section {
-    background-size: cover;
+    min-height: 70vh;
   }
-  
-  .presentation-columns {
+
+  .hero-container {
+    padding: 2rem 1.2rem 2rem;
+    gap: 2rem;
+  }
+
+  .hero-catchphrase {
+    font-size: 1.6rem;
+    text-align: center;
+  }
+
+  .hero-features {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .hero-feature {
     flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1.2rem;
   }
-  
-  .presentation-content {
-    flex: 1;
+
+  .hero-icon {
+    width: 36px;
+    height: 36px;
+    margin-top: 0;
   }
-  
-  .presentation-offers {
+
+  .hero-feature p {
+    text-align: center;
+  }
+
+  .hero-cta-block {
     flex-direction: column;
+    text-align: center;
+    padding: 1.2rem;
   }
-  
-  .offer-card {
-    min-width: auto;
+
+  .hero-icon-cta {
+    width: 36px;
+    height: 36px;
+  }
+
+  .hero-cta-text {
+    text-align: center;
+  }
+
+  .hero-cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .btn-hero {
+    width: 100%;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .presentation-section {
-    background-attachment: scroll;
+  .btn-hero {
+    transition: none;
   }
 }

@@ -62,8 +62,8 @@
 }
 
 .nav-item:hover {
-  color: #3498db;
-  background: rgba(52, 152, 219, 0.05);
+  color: #1a1a1a;
+  background: rgba(200, 168, 78, 0.2);
 }
 
 .nav-item:hover svg {
@@ -71,12 +71,12 @@
 }
 
 .nav-item.active {
-  color: #3498db;
-  background: rgba(52, 152, 219, 0.1);
+  color: #1a1a1a;
+  background: rgba(200, 168, 78, 0.35);
 }
 
 .nav-item:focus {
-  outline: 2px solid #3498db;
+  outline: 2px solid #c8a84e;
   outline-offset: 4px;
 }
 
@@ -106,8 +106,8 @@
 }
 
 .nav-toggle.open {
-  background: rgba(52, 152, 219, 0.15);
-  color: #3498db;
+  background: rgba(200, 168, 78, 0.15);
+  color: #1a1a1a;
 }
 
 /* ====== Mobile navbar ====== */

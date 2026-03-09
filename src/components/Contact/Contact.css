@@ -1,5 +1,5 @@
 .contact-section {
-  background: linear-gradient(135deg, #3599f0 0%, #1c259b 100%);
+  background: rgba(248, 249, 250, 0.8);
 }
 
 .contact-container {
@@ -12,24 +12,26 @@
 }
 
 .contact-section h2 {
-  color: white;
+  color: #2c3e50;
   font-size: 2rem;
   margin: 0 0 1rem 0;
   text-align: center;
 }
 
 .contact-section .subtitle {
-  color: white;
+  color: #555;
   text-align: center;
   margin-bottom: 2rem;
   font-size: 1.1rem;
 }
 
 .contact-form {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   width: 50%;
 }
 
@@ -88,7 +90,7 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #2c3e50;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   font-size: 0.95rem;
 }
@@ -97,17 +99,24 @@
 .form-group textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #e0e0e0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   font-size: 1rem;
   font-family: inherit;
+  color: white;
   transition: border-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #4facfe;
+  border-color: #c8a84e;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .form-group textarea {
@@ -118,8 +127,8 @@
 .submit-button {
   width: 100%;
   padding: 1rem;
-  background: rgb(104, 57, 190);
-  color: white;
+  background: #c8a84e;
+  color: #1a1a1a;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
@@ -130,7 +139,8 @@
 
 .submit-button:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+  background: #d4b85c;
+  box-shadow: 0 6px 20px rgba(200, 168, 78, 0.4);
 }
 
 .submit-button:active:not(:disabled) {
