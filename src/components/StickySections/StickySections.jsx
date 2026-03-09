@@ -1,14 +1,9 @@
 import { useEffect, useRef } from 'react'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import { ScrollSmoother } from 'gsap/ScrollSmoother'
 import Presentation from '../Presentation/Presentation'
 import Services from '../Services/Services'
 import Projets from '../Projets/Projets'
 import Contact from '../Contact/Contact'
 import './StickySections.css'
-
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
 
 const StickySections = ({ onSectionChange, scrollToSection }) => {
   const wrapperRef = useRef(null)
@@ -17,6 +12,19 @@ const StickySections = ({ onSectionChange, scrollToSection }) => {
   const bgRef = useRef(null)
 
   useEffect(() => {
+    let cancelled = false
+
+    Promise.all([
+      import('gsap'),
+      import('gsap/ScrollTrigger'),
+      import('gsap/ScrollSmoother'),
+    ]).then(([gsapMod, stMod, ssMod]) => {
+      if (cancelled) return
+      const gsap = gsapMod.gsap
+      const ScrollTrigger = stMod.ScrollTrigger
+      const ScrollSmoother = ssMod.ScrollSmoother
+      gsap.registerPlugin(ScrollTrigger, ScrollSmoother)
+
     gsap.ticker.lagSmoothing(1000, 16)
 
     // Créer le ScrollSmoother pour un scroll global fluide
@@ -126,14 +134,17 @@ const StickySections = ({ onSectionChange, scrollToSection }) => {
       window.addEventListener('scroll', handleScroll)
       handleScroll()
     }, 100)
+    }) // end Promise.then
 
     return () => {
-      clearTimeout(timer)
+      cancelled = true
       if (smootherRef.current) {
         smootherRef.current.kill()
         smootherRef.current = null
       }
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      import('gsap/ScrollTrigger').then(({ ScrollTrigger }) => {
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill())
+      })
     }
   }, [onSectionChange])
 
@@ -142,8 +153,14 @@ const StickySections = ({ onSectionChange, scrollToSection }) => {
       <div ref={bgRef} className="page-background" />
       <div ref={contentRef} className="sticky-sections">
         <Presentation scrollToSection={scrollToSection} />
+        <svg className="section-wave wave-to-opaque" viewBox="0 165.92 186.74 8.46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 86.869116 165.92269 C 58.962577 165.99849 29.779633 167.51169 0 169.70024 L 0 174.37902 L 186.73537 174.37902 C 156.51908 168.10385 122.74895 165.82523 86.869116 165.92269" />
+        </svg>
         <Services />
         <Projets />
+        <svg className="section-wave wave-to-transparent" viewBox="0 165.92 186.74 8.46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M 86.869116 165.92269 C 58.962577 165.99849 29.779633 167.51169 0 169.70024 L 0 174.37902 L 186.73537 174.37902 C 156.51908 168.10385 122.74895 165.82523 86.869116 165.92269" />
+        </svg>
         <Contact />
       </div>
     </div>

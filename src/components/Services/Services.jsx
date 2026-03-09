@@ -1,28 +1,86 @@
+import { useState } from 'react'
 import Section from '../Section/Section'
 import './Services.css'
 
+const METHODS = [
+  {
+    id: 'renfort',
+    title: 'Renfort d\u2019équipe — Assistance technique',
+    paragraphs: [
+      'Lorsque votre équipe a besoin d\u2019accélérer le développement ou de renforcer ses compétences techniques, je peux intervenir en renfort direct au sein de votre équipe.',
+      'Intégré à votre organisation et à vos méthodes de travail, je contribue au développement de vos projets numériques en collaboration avec vos développeurs, designers et chefs de projet.',
+      'Ce mode d\u2019intervention permet de gagner rapidement en capacité de production tout en restant flexible selon l\u2019évolution de vos besoins.',
+    ],
+  },
+  {
+    id: 'projet',
+    title: 'Développement de projet — Forfait agile',
+    paragraphs: [
+      'Pour la création d\u2019un nouveau service numérique, je propose un accompagnement en développement de projet avec une approche agile.',
+      'Nous définissons ensemble les objectifs du projet et un budget global, puis le développement avance par cycles courts et itératifs, permettant d\u2019ajuster les priorités au fur et à mesure.',
+      'Cette méthode permet de livrer rapidement de la valeur, tout en conservant la souplesse nécessaire pour faire évoluer le produit selon les retours et les besoins réels.',
+    ],
+  },
+  {
+    id: 'maintenance',
+    title: 'Maintenance et évolution',
+    paragraphs: [
+      'Un projet numérique nécessite un suivi dans le temps pour garantir sa stabilité, sa sécurité et son évolution.',
+      'Je propose un accompagnement de maintenance applicative, incluant la correction de bugs, les mises à jour techniques et l\u2019ajout de nouvelles fonctionnalités.',
+      'Cet accompagnement permet de faire vivre votre produit dans la durée, tout en assurant sa fiabilité et son adaptation à vos nouveaux besoins.',
+    ],
+  },
+  {
+    id: 'audit',
+    title: 'Audit technique et conseil',
+    paragraphs: [
+      'Lorsqu\u2019un projet atteint une certaine complexité ou rencontre des difficultés techniques, un regard extérieur peut apporter une réelle valeur.',
+      'Je réalise des audits techniques afin d\u2019analyser l\u2019architecture, la qualité du code ou les performances d\u2019un système existant.',
+      'L\u2019objectif est d\u2019identifier les points d\u2019amélioration et de proposer des recommandations concrètes pour renforcer la robustesse, la maintenabilité et l\u2019efficacité de votre solution.',
+    ],
+  },
+]
+
 const Services = () => {
+  const [activeId, setActiveId] = useState(METHODS[0].id)
+  const active = METHODS.find((m) => m.id === activeId)
+
   return (
     <Section id="services" className="services-section">
       <div className="services-container">
-        <h2>Méthodes d'accompagnement</h2>
-        <div className="services-content">
-          <p>
-            Mon approche repose sur une collaboration étroite et structurée, adaptée à chaque phase
-            de votre projet. De l'analyse initiale des besoins à la mise en production, chaque étape
-            est pensée pour garantir un résultat fiable et maintenable. Je privilégie des cycles courts
-            de développement avec des points réguliers, permettant d'ajuster la direction en continu
-            et d'intégrer vos retours au fil de l'avancement.
-          </p>
-          <p>
-            L'accompagnement inclut également une veille technique permanente, des revues de code
-            rigoureuses et une documentation claire pour assurer la pérennité de chaque solution livrée.
-            Que ce soit pour un projet neuf, une refonte ou un renfort ponctuel, la méthode s'adapte
-            à votre contexte — startup en phase de lancement, équipe technique en place, ou entreprise
-            souhaitant moderniser son existant. L'objectif reste le même : construire des solutions
-            solides, compréhensibles et évolutives, dans le respect de vos délais et de vos contraintes
-            budgétaires.
-          </p>
+        {/* Desktop: tabs + detail */}
+        <div className="services-desktop">
+          <h2>{active.title}</h2>
+          <div className="services-layout">
+            <nav className="services-tabs">
+              {METHODS.map((m) => (
+                <button
+                  key={m.id}
+                  className={`services-tab-btn${m.id === activeId ? ' active' : ''}`}
+                  onClick={() => setActiveId(m.id)}
+                >
+                  {m.title}
+                </button>
+              ))}
+            </nav>
+            <div className="services-detail" key={activeId}>
+              {active.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Mobile: all methods listed */}
+        <div className="services-mobile">
+          {METHODS.map((m) => (
+            <article key={m.id} className="services-method-block">
+              <h3>{m.title}</h3>
+              {m.paragraphs.map((p, i) => (
+                <p key={i}>{p}</p>
+              ))}
+            </article>
+          ))}
         </div>
       </div>
     </Section>

@@ -53,8 +53,10 @@ const Contact = () => {
   return (
     <Section id="contact" className="contact-section">
       <div className="contact-container">
-        <h2>Contact</h2>
-        <p className="subtitle">Prenons contact pour concrétiser vos projets</p>
+        <div className="contact-header">
+          <h2>Contact</h2>
+          <p className="subtitle">Prenons contact pour concrétiser vos projets</p>
+        </div>
 
         <form className="contact-form" onSubmit={handleSubmit}>
           <div className="form-group">

@@ -6,6 +6,7 @@ const ProjectCard = ({ title, description, img, lien, className = '', style }) =
           src={img}
           alt={title}
           className="project-card-image"
+          loading="lazy"
         />
       </a>
       <div className="project-card-content">

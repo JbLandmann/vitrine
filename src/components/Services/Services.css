@@ -1,22 +1,69 @@
 .services-section {
-  background: rgba(248, 249, 250, 0.8);
+  background: #f8f9fa;
 }
 
 .services-container {
-  max-width: 900px;
+  max-width: 1100px;
   width: 100%;
   margin: 0 auto;
   padding: 4rem 2rem;
 }
 
-.services-section h2 {
+/* ======= Desktop ======= */
+
+.services-desktop h2 {
   color: #2c3e50;
   font-size: 2rem;
   margin: 0 0 2rem 0;
   text-align: center;
 }
 
-.services-content p {
+.services-layout {
+  display: flex;
+  gap: 2.5rem;
+  align-items: flex-start;
+}
+
+.services-tabs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  min-width: 280px;
+  flex-shrink: 0;
+}
+
+.services-tab-btn {
+  background: none;
+  border: none;
+  border-left: 3px solid transparent;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #555;
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  line-height: 1.4;
+}
+
+.services-tab-btn:hover {
+  color: #2c3e50;
+  background: rgba(44, 62, 80, 0.04);
+}
+
+.services-tab-btn.active {
+  border-left-color: #2c3e50;
+  color: #2c3e50;
+  font-weight: 600;
+  background: rgba(44, 62, 80, 0.06);
+}
+
+.services-detail {
+  flex: 1;
+  animation: servicesFadeIn 0.3s ease;
+}
+
+.services-detail p {
   color: #333;
   font-size: 1.1rem;
   line-height: 1.8;
@@ -24,7 +71,44 @@
   text-align: left;
 }
 
-.services-content p:last-child {
+.services-detail p:last-child {
+  margin-bottom: 0;
+}
+
+@keyframes servicesFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ======= Mobile ======= */
+
+.services-mobile {
+  display: none;
+}
+
+.services-method-block {
+  margin-bottom: 2.5rem;
+}
+
+.services-method-block:last-child {
+  margin-bottom: 0;
+}
+
+.services-method-block h3 {
+  color: #2c3e50;
+  font-size: 1.3rem;
+  margin: 0 0 1rem 0;
+}
+
+.services-method-block p {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0 0 1rem 0;
+  text-align: left;
+}
+
+.services-method-block p:last-child {
   margin-bottom: 0;
 }
 
@@ -33,11 +117,11 @@
     padding: 2rem 1.2rem;
   }
 
-  .services-section h2 {
-    font-size: 1.6rem;
+  .services-desktop {
+    display: none;
   }
 
-  .services-content p {
-    font-size: 1rem;
+  .services-mobile {
+    display: block;
   }
 }
