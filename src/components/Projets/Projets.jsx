@@ -15,7 +15,7 @@ const Projets = () => {
       id: 1,
       title: 'Trésors Nomade',
       description: 'Une vitrine pour présenter ses trésors et leur histoire',
-      img: `${import.meta.env.BASE_URL}bg-map-plan.avif`,
+      img: `${import.meta.env.BASE_URL}tn_hero.avif`,
       lien: "https://tresors-nomade.web.app"
     },
     {
@@ -133,8 +133,6 @@ const Projets = () => {
     <Section id="projets" className="projets-section">
       <div className="projets-background"></div>
       <div className="projets-container">
-        <h2>Creations</h2>
-
         <div
           className="carousel-wrapper"
           onTouchStart={handleTouchStart}

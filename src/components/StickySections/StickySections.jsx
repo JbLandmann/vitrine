@@ -30,52 +30,8 @@ const StickySections = ({ onSectionChange }) => {
       const isMobile = window.innerWidth <= 768
 
       // =============================================
-      // FOLD-AWAY : pour chaque section (sauf la dernière)
+      // FOLD-AWAY removed — standard scroll, no animation
       // =============================================
-      sections.forEach((section, i) => {
-        if (i >= sections.length - 1) return
-
-        const sectionContent = section.querySelector('.section-content')
-        if (!sectionContent) return
-
-        const startTrigger = isMobile ? 'top 45%' : 'top 55%'
-        const endTrigger = isMobile ? 'top -60%' : 'top -15%'
-
-        // Animation fold-away 3D
-        gsap.fromTo(sectionContent, {
-          y: '0%',
-          z: 0,
-          rotationX: 0,
-        }, {
-          y: '-30%',
-          z: -250,
-          rotationX: 45,
-          scrollTrigger: {
-            trigger: sections[i + 1],
-            start: startTrigger,
-            end: endTrigger,
-            scrub: 1,
-            pin: section,
-            pinSpacing: false,
-            id: `section-${i}`,
-          }
-        })
-
-        // Overlay opacity
-        const opacityStartTrigger = isMobile ? 'top 85%' : 'top 75%'
-        const opacityEndTrigger = isMobile ? 'top -35%' : 'top -25%'
-
-        gsap.to(sectionContent, {
-          '--after-opacity': 1,
-          scrollTrigger: {
-            trigger: sections[i + 1],
-            start: opacityStartTrigger,
-            end: opacityEndTrigger,
-            scrub: true,
-            id: `section-opacity-${i}`,
-          }
-        })
-      })
 
       // =============================================
       // PROJETS : animation interne (titre + cartes)
