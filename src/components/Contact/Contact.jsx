@@ -55,7 +55,6 @@ const Contact = () => {
       <div className="contact-container">
         <div className="contact-header">
           <h2>Contact</h2>
-          <p className="subtitle">Prenons contact pour concrétiser vos projets</p>
         </div>
 
         <form className="contact-form" onSubmit={handleSubmit}>

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react'
 import Presentation from '../Presentation/Presentation'
 import Services from '../Services/Services'
+import Competences from '../Competences/Competences'
 import Projets from '../Projets/Projets'
 import Contact from '../Contact/Contact'
 import './StickySections.css'
@@ -157,6 +158,7 @@ const StickySections = ({ onSectionChange, scrollToSection }) => {
           <path d="M 86.869116 165.92269 C 58.962577 165.99849 29.779633 167.51169 0 169.70024 L 0 174.37902 L 186.73537 174.37902 C 156.51908 168.10385 122.74895 165.82523 86.869116 165.92269" />
         </svg>
         <Services />
+        <Competences />
         <Projets />
         <svg className="section-wave wave-to-transparent" viewBox="0 165.92 186.74 8.46" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M 86.869116 165.92269 C 58.962577 165.99849 29.779633 167.51169 0 169.70024 L 0 174.37902 L 186.73537 174.37902 C 156.51908 168.10385 122.74895 165.82523 86.869116 165.92269" />

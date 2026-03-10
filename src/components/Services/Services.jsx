@@ -50,7 +50,7 @@ const Services = () => {
       <div className="services-container">
         {/* Desktop: tabs + detail */}
         <div className="services-desktop">
-          <h2>{active.title}</h2>
+          <h2>Services</h2>
           <div className="services-layout">
             <nav className="services-tabs">
               {METHODS.map((m) => (
@@ -63,9 +63,16 @@ const Services = () => {
                 </button>
               ))}
             </nav>
-            <div className="services-detail" key={activeId}>
-              {active.paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
+            <div className="services-detail-wrapper">
+              {METHODS.map((m) => (
+                <div
+                  className={`services-detail${m.id === activeId ? ' active' : ''}`}
+                  key={m.id}
+                >
+                  {m.paragraphs.map((p, i) => (
+                    <p key={i}>{p}</p>
+                  ))}
+                </div>
               ))}
             </div>
           </div>

@@ -1,5 +1,9 @@
 .services-section {
   background: #f8f9fa;
+  margin-top: -1px;
+  padding-top: 1px;
+  margin-bottom: -1px;
+  padding-bottom: 1px;
 }
 
 .services-container {
@@ -58,8 +62,24 @@
   background: rgba(44, 62, 80, 0.06);
 }
 
-.services-detail {
+.services-detail-wrapper {
   flex: 1;
+  display: grid;
+  min-height: 22rem;
+  align-content: start;
+}
+
+.services-detail-wrapper > .services-detail {
+  grid-area: 1 / 1;
+  visibility: hidden;
+  pointer-events: none;
+  padding: 0;
+  margin: 0;
+}
+
+.services-detail-wrapper > .services-detail.active {
+  visibility: visible;
+  pointer-events: auto;
   animation: servicesFadeIn 0.3s ease;
 }
 
@@ -88,10 +108,16 @@
 
 .services-method-block {
   margin-bottom: 2.5rem;
+  padding-bottom: 2.5rem;
+  border-bottom: 2px solid #2c3e50;
+  border-image: linear-gradient(to right, transparent, #2c3e50, transparent) 1;
 }
 
 .services-method-block:last-child {
   margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+  border-image: none;
 }
 
 .services-method-block h3 {

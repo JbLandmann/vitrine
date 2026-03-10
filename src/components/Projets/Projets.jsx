@@ -3,8 +3,16 @@ import Section from '../Section/Section'
 import ProjectCard from './ProjectCard'
 import './Projets.css'
 
+const getVisibleCount = (width) => {
+  if (width >= 1400) return 4
+  if (width >= 1024) return 3
+  if (width >= 768) return 2
+  return 1
+}
+
 const Projets = () => {
-  const [isMobile, setIsMobile] = useState(false)
+  const [visibleCount, setVisibleCount] = useState(() => getVisibleCount(window.innerWidth))
+  const isMobile = visibleCount === 1
   const [activeIndex, setActiveIndex] = useState(0)
   const [isFocused, setIsFocused] = useState(false)
   const touchStartX = useRef(0)
@@ -42,19 +50,16 @@ const Projets = () => {
   ]
 
   const total = projects.length
-  const visibleCount = isMobile ? 1 : 3
   const maxIndex = Math.max(0, total - visibleCount)
   const canGoPrev = activeIndex > 0
   const canGoNext = activeIndex < maxIndex
   const canNavigate = total > visibleCount
 
-  // Responsive detection
+  // Responsive detection — update visibleCount on resize
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)')
-    const onChange = (e) => setIsMobile(e.matches)
-    setIsMobile(mq.matches)
-    mq.addEventListener('change', onChange)
-    return () => mq.removeEventListener('change', onChange)
+    const onResize = () => setVisibleCount(getVisibleCount(window.innerWidth))
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
   }, [])
 
   // Clamp activeIndex when switching mobile/desktop
@@ -96,7 +101,7 @@ const Projets = () => {
     // Card is in the visible window
     if (index >= firstVisible && index <= lastVisible) {
       const posInWindow = index - firstVisible
-      const centerOffset = Math.floor(visibleCount / 2)
+      const centerOffset = (visibleCount - 1) / 2
       const offset = posInWindow - centerOffset
       let cls = 'carousel-active'
       if (isMobile && posInWindow === 0 && isFocused) {
@@ -107,13 +112,13 @@ const Projets = () => {
 
     // Card just before visible window — peek behind left
     if (index === firstVisible - 1) {
-      const centerOffset = Math.floor(visibleCount / 2)
+      const centerOffset = (visibleCount - 1) / 2
       return { className: 'carousel-prev', offset: -(centerOffset + 1) }
     }
 
     // Card just after visible window — peek behind right
     if (index === lastVisible + 1) {
-      const centerOffset = Math.floor(visibleCount / 2)
+      const centerOffset = (visibleCount - 1) / 2
       return { className: 'carousel-next', offset: centerOffset + 1 }
     }
 
@@ -133,6 +138,7 @@ const Projets = () => {
     <Section id="projets" className="projets-section">
       <div className="projets-background"></div>
       <div className="projets-container">
+        <h2 className="projets-title">Réalisations</h2>
         <div
           className="carousel-wrapper"
           onTouchStart={handleTouchStart}
