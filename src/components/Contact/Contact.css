@@ -1,5 +1,12 @@
 .contact-section {
-  background: linear-gradient(135deg, #3599f0 0%, #1c259b 100%);
+  background: transparent;
+}
+
+.contact-header {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 1.5rem 2rem;
+  border-radius: 12px;
+  margin-bottom: 2rem;
 }
 
 .contact-container {
@@ -12,24 +19,19 @@
 }
 
 .contact-section h2 {
-  color: white;
+  color: #fff;
   font-size: 2rem;
   margin: 0 0 1rem 0;
   text-align: center;
 }
 
-.contact-section .subtitle {
-  color: white;
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-}
-
 .contact-form {
-  background: rgba(255, 255, 255, 0.95);
-  padding: 1rem;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
   width: 50%;
 }
 
@@ -88,7 +90,7 @@
 .form-group label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #2c3e50;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 500;
   font-size: 0.95rem;
 }
@@ -97,17 +99,24 @@
 .form-group textarea {
   width: 100%;
   padding: 0.75rem;
-  border: 2px solid #e0e0e0;
+  background: rgba(255, 255, 255, 0.1);
+  border: 2px solid rgba(255, 255, 255, 0.15);
   border-radius: 8px;
   font-size: 1rem;
   font-family: inherit;
+  color: white;
   transition: border-color 0.3s ease;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #4facfe;
+  border-color: #c8a84e;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .form-group textarea {
@@ -115,22 +124,40 @@
   min-height: 120px;
 }
 
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #222 inset;
+  border: 2px solid #373737;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.form-group input:-webkit-autofill:focus {
+  -webkit-text-fill-color: white;
+  -webkit-box-shadow: 0 0 0px 1000px #222 inset;
+  border: 2px solid #c8a84e;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 .submit-button {
-  width: 100%;
+  flex: 1;
   padding: 1rem;
-  background: rgb(104, 57, 190);
-  color: white;
+  background: linear-gradient(to right, #d4b85c 50%, #c8a84e 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  color: #1a1a1a;
   border: none;
   border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: background-position 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .submit-button:hover:not(:disabled) {
+  background-position: 0 0;
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+  box-shadow: 0 6px 20px rgba(200, 168, 78, 0.4);
 }
 
 .submit-button:active:not(:disabled) {
@@ -140,6 +167,37 @@
 .submit-button:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+.button-row {
+  display: flex;
+  align-items: stretch;
+  gap: 0.75rem;
+}
+
+.linkedin-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 0.7rem;
+  background: linear-gradient(to right, #0a66c2 50%, #0077b5 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
+  border-radius: 8px;
+  transition: background-position 0.5s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  text-decoration: none;
+}
+
+.linkedin-link:hover {
+  background-position: 0 0;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 119, 181, 0.4);
+}
+
+.linkedin-link svg {
+  width: 2rem;
+  height: 2rem;
+  color: #fff;
 }
 
 .status-message {

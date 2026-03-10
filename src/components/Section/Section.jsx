@@ -1,10 +1,8 @@
-import { cloneElement } from 'react'
 import './Section.css'
 
-//SctickySection
-const Section = ({ id, className = '', children, customRef, enableScrollAnimation = false }) => {
+const Section = ({ id, className = '', children, customRef }) => {
   return (
-    <section id={id} className={`section ${className}`} ref={customRef} data-scroll-animation={enableScrollAnimation}>
+    <section id={id} className={`section ${className}`} ref={customRef}>
       <div className="section-content">
         {children}
       </div>

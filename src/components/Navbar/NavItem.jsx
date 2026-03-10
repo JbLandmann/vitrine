@@ -1,13 +1,15 @@
-const NavItem = ({ id, label, icon, isActive, onClick }) => {
+const NavItem = ({ id, label, icon, onClick }) => {
   const handleClick = (e) => {
     e.preventDefault()
-    onClick()
+    if (onClick) {
+      onClick()
+    }
   }
 
   return (
     <a
       href={`#${id}`}
-      className={`nav-item ${isActive ? 'active' : ''}`}
+      className="nav-item"
       onClick={handleClick}
     >
       {icon}
