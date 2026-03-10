@@ -6,7 +6,7 @@ import Projets from '../Projets/Projets'
 import Contact from '../Contact/Contact'
 import './StickySections.css'
 
-const StickySections = ({ onSectionChange, scrollToSection }) => {
+const StickySections = ({ scrollToSection }) => {
   const wrapperRef = useRef(null)
   const contentRef = useRef(null)
   const smootherRef = useRef(null)
@@ -117,23 +117,6 @@ const StickySections = ({ onSectionChange, scrollToSection }) => {
       ScrollTrigger.refresh()
 
       // =============================================
-      // Active section tracking
-      // =============================================
-      const handleScroll = () => {
-        let current = ''
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop
-          if (window.pageYOffset >= sectionTop - 100) {
-            current = section.getAttribute('id')
-          }
-        })
-        if (current && onSectionChange) {
-          onSectionChange(current)
-        }
-      }
-
-      window.addEventListener('scroll', handleScroll)
-      handleScroll()
     }, 100)
     }) // end Promise.then
 
@@ -147,7 +130,7 @@ const StickySections = ({ onSectionChange, scrollToSection }) => {
         ScrollTrigger.getAll().forEach(trigger => trigger.kill())
       })
     }
-  }, [onSectionChange])
+  }, [])
 
   return (
     <div ref={wrapperRef} className="sticky-sections-wrapper">

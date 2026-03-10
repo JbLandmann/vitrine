@@ -1,10 +1,9 @@
-import { useState, useRef, useCallback, useEffect } from 'react'
+import { useRef, useCallback, useEffect } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import StickySections from './components/StickySections/StickySections'
 import './App.css'
 
 function App() {
-  const [activeSection, setActiveSection] = useState('presentation')
   const gsapRef = useRef(null)
 
   useEffect(() => {
@@ -39,11 +38,8 @@ function App() {
 
   return (
     <>
-      <Navbar
-        activeSection={activeSection}
-        onNavigate={scrollToSection}
-      />
-      <StickySections onSectionChange={setActiveSection} scrollToSection={scrollToSection} />
+      <Navbar onNavigate={scrollToSection} />
+      <StickySections scrollToSection={scrollToSection} />
     </>
   )
 }

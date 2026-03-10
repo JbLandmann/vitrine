@@ -116,17 +116,19 @@
   font-size: 1.05rem;
   font-weight: 600;
   color: #1a1a1a;
-  background: #c8a84e;
+  background: linear-gradient(to right, #d4b85c 50%, #c8a84e 50%);
+  background-size: 200% 100%;
+  background-position: 100% 0;
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  transition: background 0.25s, box-shadow 0.25s, transform 0.15s;
+  transition: background-position 0.5s ease, box-shadow 0.3s ease, transform 0.15s;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .btn-hero:hover {
-  background: #d4b85c;
+  background-position: 0 0;
   box-shadow: 0 4px 18px rgba(200, 168, 78, 0.45);
   transform: translateY(-2px);
 }

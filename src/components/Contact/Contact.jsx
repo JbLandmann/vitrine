@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { FaLinkedinIn } from 'react-icons/fa'
 import Section from '../Section/Section'
 import './Contact.css'
 
@@ -20,7 +21,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     setStatus('sending')
-
+    console.log("KEY=", import.meta.env.VITE_EMAIL_PUBLIC_KEY)
     const formDataToSend = new FormData()
     formDataToSend.append('access_key', import.meta.env.VITE_EMAIL_PUBLIC_KEY)
     formDataToSend.append('name', formData.name)
@@ -94,9 +95,20 @@ const Contact = () => {
             ></textarea>
           </div>
 
-          <button type="submit" className="submit-button" disabled={status === 'sending'}>
-            {status === 'sending' ? 'Envoi en cours...' : 'Envoyer'}
-          </button>
+          <div className="button-row">
+            <button type="submit" className="submit-button" disabled={status === 'sending'}>
+              {status === 'sending' ? 'Envoi en cours...' : 'Envoyer'}
+            </button>
+            <a
+              href="https://www.linkedin.com/in/jean-music-music/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="linkedin-link"
+              aria-label="LinkedIn"
+            >
+              <FaLinkedinIn />
+            </a>
+          </div>
 
           {status === 'success' && (
             <p className="status-message success">Message envoyé avec succès !</p>
