@@ -100,7 +100,7 @@ const Contact = () => {
               {status === 'sending' ? 'Envoi en cours...' : 'Envoyer'}
             </button>
             <a
-              href="https://www.linkedin.com/in/jean-music-music/"
+              href="https://www.linkedin.com/in/jean-baptiste-landmann-80b0731b3/"
               target="_blank"
               rel="noopener noreferrer"
               className="linkedin-link"

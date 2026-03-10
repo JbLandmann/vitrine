@@ -50,7 +50,7 @@ const Services = () => {
       <div className="services-container">
         {/* Desktop: tabs + detail */}
         <div className="services-desktop">
-          <h2>Services</h2>
+          <h2>Méthodes</h2>
           <div className="services-layout">
             <nav className="services-tabs">
               {METHODS.map((m) => (

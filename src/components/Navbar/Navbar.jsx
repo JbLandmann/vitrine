@@ -11,12 +11,12 @@ const Navbar = ({ onNavigate }) => {
   const navItems = [
     {
       id: 'presentation',
-      label: 'Présentation',
+      label: 'Service',
       icon: <FiUser size={24} />
     },
     {
       id: 'services',
-      label: 'Services',
+      label: 'Méthodes',
       icon: <FiEdit size={24} />
     },
     {

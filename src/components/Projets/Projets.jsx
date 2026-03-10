@@ -22,28 +22,32 @@ const Projets = () => {
     {
       id: 1,
       title: 'Trésors Nomade',
-      description: 'Une vitrine pour présenter ses trésors et leur histoire',
+      subtitle: 'Une vitrine pour présenter ses trésors et leur histoire',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
       img: `${import.meta.env.BASE_URL}tn_hero.avif`,
       lien: "https://tresors-nomade.web.app"
     },
     {
       id: 2,
       title: 'FluteCraft',
-      description: 'Une page web pour fabriquer vous même la flute de vos rêves',
+      subtitle: 'Une page web pour fabriquer vous même la flute de vos rêves',
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
       imageColor: '#667eea',
       lien:"#"
     },
     {
       id: 3,
       title: "App Map",
-      description: "Un regroupement d'informations graphiques pour la france métropolitaine",
+      subtitle: "Un regroupement d'informations graphiques pour la france métropolitaine",
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
       imageColor: '#764ba2',
       lien:"#"
     },
     {
       id: 4,
       title: "Test",
-      description: "Juste un test",
+      subtitle: "Juste un test",
+      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
       imageColor: '#764ba2',
       lien:"#"
     }
@@ -149,9 +153,9 @@ const Projets = () => {
               <ProjectCard
                 key={project.id}
                 title={project.title}
+                subtitle={project.subtitle}
                 description={project.description}
                 imageColor={project.imageColor}
-                imageText={project.imageText}
                 img={project.img}
                 lien={project.lien}
                 className={getCardInfo(index).className}
