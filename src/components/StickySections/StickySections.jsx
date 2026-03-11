@@ -45,12 +45,12 @@ const StickySections = ({ scrollToSection }) => {
       // =============================================
       if (bgRef.current) {
         gsap.to(bgRef.current, {
-          x: '-30vw',
+          x: '-12vw',
           ease: 'none',
           scrollTrigger: {
             trigger: contentRef.current,
             start: 'top top',
-            end: 'bottom bottom',
+            end: '98% bottom',
             scrub: true,
             id: 'bg-horizontal',
           }

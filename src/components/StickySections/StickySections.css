@@ -8,8 +8,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 130%;
-    height: 100%;
+    width: 115%;
+    height: 100vh;
     background-image: url('/planete.jpg');
     background-size: cover;
     background-position: center center;
@@ -68,7 +68,7 @@
 
 @media (max-width: 768px) {
     .page-background {
-        width: 150%;
+        width: 130%;
     }
 
     .section-content {
