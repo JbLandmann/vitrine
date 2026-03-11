@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { FaLongArrowAltRight } from 'react-icons/fa'
 
-const ProjectCard = ({ title, subtitle, description, img, lien, className = '', style }) => {
+const ProjectCard = ({ title, subtitle, description, statut, img, lien, className = '', style }) => {
   const [isFlipped, setIsFlipped] = useState(false)
 
   return (
@@ -9,7 +9,7 @@ const ProjectCard = ({ title, subtitle, description, img, lien, className = '', 
       <div className={`card-inner${isFlipped ? ' flipped' : ''}`}>
         {/* ---- FRONT ---- */}
         <div className="card-front">
-          <a className="card-background" href={lien} target="_blank" rel="noopener noreferrer">
+          <a className="card-background" {...(lien ? { href: lien, target: '_blank', rel: 'noopener noreferrer' } : {})}>
             <img
               src={img}
               alt={title}
@@ -37,7 +37,8 @@ const ProjectCard = ({ title, subtitle, description, img, lien, className = '', 
             </h3>
             <FaLongArrowAltRight className="title-flip-arrow" aria-hidden="true" />
           </div>
-          <p className="card-back-description">{description}</p>
+          <p className="card-back-description" style={{ whiteSpace: 'pre-line' }}>{description}</p>
+          {statut && <p className="card-back-statut">Statut: {statut}</p>}
         </div>
       </div>
     </div>

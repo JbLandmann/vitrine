@@ -239,6 +239,12 @@
   padding: 2rem;
   overflow-y: auto;
   cursor: pointer;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.card-back::-webkit-scrollbar {
+  display: none;
 }
 
 .card-back .project-card-title {
@@ -250,6 +256,16 @@
   color: rgba(255, 255, 255, 0.9);
   line-height: 1.7;
   flex: 1;
+  text-align: left;
+}
+
+.card-back-statut {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 600;
+  text-align: left;
+  margin-top: auto;
+  padding-top: 1rem;
 }
 
 /* ====== Arrow link (top-right corner) ====== */
@@ -287,6 +303,8 @@
   margin-bottom: 0.8rem;
   cursor: pointer;
   transition: color 0.3s ease;
+  margin: 0 2rem;
+  margin-bottom: 1rem;
 }
 
 .project-card-content:hover .project-card-title,
@@ -338,7 +356,7 @@
 }
 
 .project-card-content {
-  padding: 1rem;
+  padding: 1rem 1.2rem;
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -362,21 +380,21 @@
 /* 4 cards visible (>= 1400px): narrower cards */
 @media (min-width: 1400px) {
   .carousel-wrapper .project-card {
-    width: min(350px, 22vw);
+    width: min(370px, 22vw);
   }
 }
 
 /* 3 cards visible (1024–1399px): default 350px */
 @media (min-width: 1024px) and (max-width: 1399px) {
   .carousel-wrapper .project-card {
-    width: min(350px, 28vw);
+    width: min(370px, 38vw);
   }
 }
 
 /* 2 cards visible (768–1023px): wider cards */
 @media (min-width: 768px) and (max-width: 1023px) {
   .carousel-wrapper .project-card {
-    width: min(350px, 38vw);
+    width: min(370px, 38vw);
   }
 }
 
@@ -388,13 +406,19 @@
   }
 
   .carousel-wrapper {
-    height: min(595px, 119vw);
+    height: min(595px, 80vh);
   }
 
   .carousel-wrapper .project-card {
-    width: min(350px, 70vw);
+    width: max(min(350px, 94vw), 60vw);
     height: 100%;
   }
+
+   /* .carousel-wrapper .project-card {
+    width: min(350px, 70vw);
+    min-width: max(300px, 94vw);
+    height: 100%;
+  } */
 
   .carousel-arrow {
     display: none;

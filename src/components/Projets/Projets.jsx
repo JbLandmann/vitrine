@@ -5,7 +5,7 @@ import './Projets.css'
 
 const getVisibleCount = (width) => {
   if (width >= 1400) return 4
-  if (width >= 1024) return 3
+  if (width >= 1150) return 3
   if (width >= 768) return 2
   return 1
 }
@@ -23,33 +23,37 @@ const Projets = () => {
       id: 1,
       title: 'Trésors Nomade',
       subtitle: 'Une vitrine pour présenter ses trésors et leur histoire',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
+      description: "Ce site web a été concu pour un particulier, un prototype developpé en 2 jours à l'aide d'agent IA .\n\nEntièrement fonctionnel, il est aux normes RGPD pour les mesures d'audience, contient une interface d'administration du contenu .\n\nLa base de donnée est incluse dans l'offre d'hébergement gratuite sur firebase .",
+      statut: "Production",
       img: `${import.meta.env.BASE_URL}tn_hero.avif`,
       lien: "https://tresors-nomade.web.app"
     },
     {
       id: 2,
       title: 'FluteCraft',
-      subtitle: 'Une page web pour fabriquer vous même la flute de vos rêves',
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-      imageColor: '#667eea',
-      lien:"#"
+      subtitle: 'Une page web pour fabriquer vous même la flûte de vos rêves',
+      description: "Afin de créer des flûtes, j'ai décidé de creer un outils pour m'accompagner dans le processus.\n\nCette page web en React.js aide à construire une gamme de notes personnalisée, guide l'utilisateur sur les étapes de frabrication, et propose 3 modeles de prediction de positions.\n\nDes conseils et recommendations de modification sont présent après chaque étape.",
+      statut: "Tests",
+      img: `${import.meta.env.BASE_URL}flutecraft_screen.png`,
+      lien:""
     },
     {
       id: 3,
       title: "App Map",
       subtitle: "Un regroupement d'informations graphiques pour la france métropolitaine",
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-      imageColor: '#764ba2',
-      lien:"#"
+      description: "Une application web & mobile developpée en Typescript, React / Native et Go.\n\nUn outil de visualisation, centralisation et recupération des données historiques francaises par zones géographiques.\n\nLes données couvrent divers indicateurs de santé, emploi jusqu'au comportement météorologique.\n\nCe projet dirigé selon une méthode agile vise à offrir une capacité de lecture de ces indicateurs.",
+      statut: "En cours / Staging",
+      img: `${import.meta.env.BASE_URL}appmap_screen.png`, 
+      lien:""
     },
     {
       id: 4,
-      title: "Test",
-      subtitle: "Juste un test",
-      description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.',
-      imageColor: '#764ba2',
-      lien:"#"
+      title: "Leadership Conscient",
+      subtitle: "Le futur se co-conscruit dès aujourd'hui",
+      description: "Travail réalisé pour un client.\n\nMise à jour de l'interface, des outils et librairies d'un site wordpress.\n\nObjectifs atteints :\n - Modernisation du design\n - Optimisation des dépendances.\n - Réduction des coûts\n - Guide de pilotage clés en main.",
+      statut: "Production",
+      img: `${import.meta.env.BASE_URL}lc_img.png`, 
+      lien:"https://www.leadership-conscient.com/"
     }
   ]
 
@@ -158,6 +162,7 @@ const Projets = () => {
                 imageColor={project.imageColor}
                 img={project.img}
                 lien={project.lien}
+                statut={project.statut}
                 className={getCardInfo(index).className}
                 style={getCardStyle(index)}
               />
