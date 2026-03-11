@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaLongArrowAltRight, FaTimes } from 'react-icons/fa'
+import { FaLongArrowAltRight } from 'react-icons/fa'
 
 const ProjectCard = ({ title, subtitle, description, statut, img, lien, className = '', style }) => {
   const [isFlipped, setIsFlipped] = useState(false)
@@ -18,9 +18,11 @@ const ProjectCard = ({ title, subtitle, description, statut, img, lien, classNam
             />
           </a>
 
-          <span className={`card-visit-badge ${lien ? 'has-link' : 'no-link'}`}>
-            {lien ? 'Visiter' : <FaTimes />}
-          </span>
+          {lien && (
+            <span className="card-visit-badge has-link">
+              Visiter
+            </span>
+          )}
 
           <div className="project-card-content" onClick={(e) => { e.stopPropagation(); setIsFlipped(true) }}>
             <h3 className="project-card-title">
