@@ -48,10 +48,10 @@ const StickySections = ({ scrollToSection }) => {
           x: '-30vw',
           ease: 'none',
           scrollTrigger: {
-            trigger: wrapperRef.current,
+            trigger: contentRef.current,
             start: 'top top',
             end: 'bottom bottom',
-            scrub: 1,
+            scrub: true,
             id: 'bg-horizontal',
           }
         })
