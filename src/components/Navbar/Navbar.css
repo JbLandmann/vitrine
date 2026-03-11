@@ -30,13 +30,13 @@
   transition: opacity 0.2s ease;
 }
 
-/* Desktop: hover on thin bar — expand back */
-.main-nav.scrolled:hover {
+/* Desktop: scroll up — expand back */
+.main-nav.scrolled.nav-revealed {
   height: var(--navbar-height);
   padding: 1.2rem 2rem;
 }
 
-.main-nav.scrolled:hover .nav-item {
+.main-nav.scrolled.nav-revealed .nav-item {
   opacity: 1;
   pointer-events: auto;
   transition: opacity 0.25s ease 0.1s;
@@ -86,7 +86,7 @@
   transform: translateY(-3px);
 }
 
-.nav-item:focus {
+.nav-item:focus-visible {
   outline: 2px solid #c8a84e;
   outline-offset: 4px;
 }

@@ -1,12 +1,35 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { FiUser, FiEdit, FiBriefcase, FiMail } from 'react-icons/fi'
 import NavItem from './NavItem'
 import './Navbar.css'
 
 const Navbar = ({ onNavigate }) => {
   const [isScrolled, setIsScrolled] = useState(false)
+  const [navExpanded, setNavExpanded] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
+  const lastScrollY = useRef(0)
+  const shrinkTimeoutRef = useRef(null)
+  const isHoveredRef = useRef(false)
+
+  const clearShrinkTimeout = useCallback(() => {
+    if (shrinkTimeoutRef.current) {
+      clearTimeout(shrinkTimeoutRef.current)
+      shrinkTimeoutRef.current = null
+    }
+  }, [])
+
+  const scheduleShrink = useCallback(() => {
+    clearShrinkTimeout()
+    shrinkTimeoutRef.current = setTimeout(() => {
+      if (!isHoveredRef.current) setNavExpanded(false)
+    }, 500)
+  }, [clearShrinkTimeout])
+
+  const shrinkNow = useCallback(() => {
+    clearShrinkTimeout()
+    setNavExpanded(false)
+  }, [clearShrinkTimeout])
 
   const navItems = [
     {
@@ -31,15 +54,28 @@ const Navbar = ({ onNavigate }) => {
     }
   ]
 
-  // Scroll detection: shrink after scrolling half viewport height
+  // Scroll detection: shrink after half viewport + show/hide on direction
   useEffect(() => {
+    const threshold = 15
     const onScroll = () => {
-      setIsScrolled(window.scrollY > window.innerHeight / 2)
+      const currentY = window.scrollY
+      setIsScrolled(currentY > window.innerHeight * 0.08)
+      const delta = currentY - lastScrollY.current
+      if (delta > threshold) {
+        shrinkNow()
+      } else if (delta < -threshold) {
+        setNavExpanded(true)
+        scheduleShrink()
+      }
+      lastScrollY.current = currentY
     }
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      clearShrinkTimeout()
+    }
+  }, [shrinkNow, scheduleShrink, clearShrinkTimeout])
 
   // Mobile detection
   useEffect(() => {
@@ -53,15 +89,28 @@ const Navbar = ({ onNavigate }) => {
     return () => mq.removeEventListener('change', onChange)
   }, [])
 
+  const handleMouseEnter = useCallback(() => {
+    isHoveredRef.current = true
+    clearShrinkTimeout()
+    setNavExpanded(true)
+  }, [clearShrinkTimeout])
+
+  const handleMouseLeave = useCallback(() => {
+    isHoveredRef.current = false
+    scheduleShrink()
+  }, [scheduleShrink])
+
   const handleNavigate = useCallback((id) => {
     onNavigate(id)
+    shrinkNow()
     if (isMobile) setIsOpen(false)
-  }, [onNavigate, isMobile])
+  }, [onNavigate, isMobile, shrinkNow])
 
   // Build className for <nav>
   const navClass = [
     'main-nav',
     isScrolled && !isMobile ? 'scrolled' : '',
+    navExpanded && isScrolled && !isMobile ? 'nav-revealed' : '',
     isMobile ? 'mobile' : '',
     isMobile && isOpen ? 'mobile-open' : '',
   ].filter(Boolean).join(' ')
@@ -83,7 +132,7 @@ const Navbar = ({ onNavigate }) => {
         </button>
       )}
 
-      <nav className={navClass}>
+      <nav className={navClass} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
         {navItems.map(item => (
           <NavItem
             key={item.id}

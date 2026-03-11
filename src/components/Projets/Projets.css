@@ -27,7 +27,7 @@
 .projets-title {
   color: #2c3e50;
   font-size: 2rem;
-  margin: 0 0 1.5rem 0;
+  margin: 0 0 3rem 0;
   text-align: center;
 }
 
@@ -268,6 +268,47 @@
   padding-top: 1rem;
 }
 
+/* ====== Visit badge (top of card front) ====== */
+.card-visit-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 5;
+  pointer-events: none;
+  background: transparent;
+  border: 2px solid rgba(49, 49, 49, 0.8);
+  color: rgba(49, 49, 49, 0.8);
+  padding: 0.25rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.card-background:hover ~ .card-visit-badge.has-link {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.card-background:hover ~ .card-visit-badge.no-link {
+  border-color: rgba(180, 50, 50, 0.9);
+  color: rgba(180, 50, 50, 0.9);
+}
+
+/* Mobile focused state */
+.project-card.carousel-focused .card-visit-badge.has-link {
+  border-color: #4caf50;
+  color: #4caf50;
+}
+
+.project-card.carousel-focused .card-visit-badge.no-link {
+  border-color: rgba(180, 50, 50, 0.9);
+  color: rgba(180, 50, 50, 0.9);
+}
+
 /* ====== Arrow link (top-right corner) ====== */
 .card-link-arrow {
   position: absolute;
@@ -309,7 +350,7 @@
 
 .project-card-content:hover .project-card-title,
 .card-back:hover .project-card-title {
-  color: #c8a84e;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .title-flip-arrow {
@@ -342,7 +383,7 @@
 }
 
 .project-card.carousel-focused .project-card-title {
-  color: #c8a84e;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .project-card-image {
@@ -375,6 +416,58 @@
   line-height: 1.6;
 }
 
+/* ====== Front card footer: Détails + arrow ====== */
+.card-front-footer {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
+
+.card-details-group {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.card-details-label {
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
+  padding: 0.1rem 0.4rem;
+  border-radius: 9999px;
+  font-size: 0.95rem;
+  transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+.card-details-arrow {
+  position: absolute;
+  left: calc(100% + 0.5rem);
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 1.2rem;
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.project-card-content:hover .card-details-label {
+  border-color: #c8a84e;
+  color: #c8a84e;
+}
+
+.project-card-content:hover .card-details-arrow {
+  color: #c8a84e;
+  transform: translateY(-50%) translateX(4px);
+}
+
+.project-card.carousel-focused .card-details-label {
+  border-color: #c8a84e;
+  color: #c8a84e;
+}
+
+.project-card.carousel-focused .card-details-arrow {
+  color: #c8a84e;
+  transform: translateY(-50%) translateX(4px);
+}
+
 /* ====== Responsive card widths ====== */
 
 /* 4 cards visible (>= 1400px): narrower cards */
@@ -400,6 +493,10 @@
 
 /* ====== Mobile overrides (< 768px) ====== */
 @media (max-width: 768px) {
+  .projets-title {
+    margin: 0 0 1rem 0;
+  }
+
   .carousel-wrapper {
     margin-top: 2rem;
     touch-action: pan-y;
