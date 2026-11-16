@@ -32,7 +32,7 @@ const Projets = () => {
       id: 2,
       title: 'FluteCraft',
       subtitle: 'Une page web pour fabriquer vous même la flûte de vos rêves',
-      description: "Afin de créer des flûtes, j'ai décidé de creer un outils pour m'accompagner dans le processus.\n\nCette page web en React.js aide à construire une gamme de notes personnalisée, guide l'utilisateur sur les étapes de frabrication, et propose 3 modeles de prediction de positions.\n\nDes conseils et recommendations de modification sont présents après chaque étape.",
+      description: "Afin de créer des flûtes, j'ai décidé de creer un outil pour m'accompagner dans le processus.\n\nCette page web en React.js aide à construire une gamme de notes personnalisée, guide l'utilisateur sur les étapes de frabrication, et propose 3 modeles de prediction de positions.\n\nDes conseils et recommendations de modification sont présents après chaque étape.",
       statut: "Tests",
       img: `${import.meta.env.BASE_URL}flutecraft_screen.png`,
       lien:""
@@ -44,7 +44,7 @@ const Projets = () => {
       description: "Une application web & mobile developpée en Typescript, React / Native et Go.\n\nUn outil de visualisation, centralisation et recupération des données historiques francaises par zones géographiques.\n\nLes données couvrent divers indicateurs de santé, emploi jusqu'au comportement météorologique.\n\nCe projet dirigé selon une méthode agile vise à offrir une capacité de lecture de ces indicateurs.",
       statut: "En cours / Staging",
       img: `${import.meta.env.BASE_URL}appmap_screen.png`, 
-      lien:""
+      lien:"https://vps-954b32b8.vps.ovh.net/"
     },
     {
       id: 4,
