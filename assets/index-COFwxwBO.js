@@ -41,17 +41,17 @@ Error generating stack: `+i.message+`
 
 Entièrement fonctionnel, il est aux normes RGPD pour les mesures d'audience, contient une interface d'administration du contenu .
 
-La base de donnée est incluse dans l'offre d'hébergement gratuite sur firebase .`,statut:"Production",img:"/vitrine/tn_hero.avif",lien:"https://tresors-nomade.web.app"},{id:2,title:"FluteCraft",subtitle:"Une page web pour fabriquer vous même la flûte de vos rêves",description:`Afin de créer des flûtes, j'ai décidé de creer un outils pour m'accompagner dans le processus.
+La base de donnée est incluse dans l'offre d'hébergement gratuite sur firebase .`,statut:"Production",img:"/vitrine/tn_hero.avif",lien:"https://tresors-nomade.web.app"},{id:2,title:"FluteCraft",subtitle:"Une page web pour fabriquer vous même la flûte de vos rêves",description:`Afin de créer des flûtes, j'ai décidé de creer un outil pour m'accompagner dans le processus.
 
 Cette page web en React.js aide à construire une gamme de notes personnalisée, guide l'utilisateur sur les étapes de frabrication, et propose 3 modeles de prediction de positions.
 
-Des conseils et recommendations de modification sont présents après chaque étape.`,statut:"Tests",img:"/vitrine/flutecraft_screen.png",lien:""},{id:3,title:"App Map",subtitle:"Un regroupement d'informations graphiques pour la france métropolitaine",description:`Une application web & mobile developpée en Typescript, React / Native et Go.
+Des conseils et recommandations de modifications sont présents après chaque étape.`,statut:"Tests",img:"/vitrine/flutecraft_screen.png",lien:""},{id:3,title:"App Map",subtitle:"Un regroupement d'informations graphiques pour la france métropolitaine",description:`Une application web & mobile developpée en Typescript, React / Native et Go.
 
 Un outil de visualisation, centralisation et recupération des données historiques francaises par zones géographiques.
 
 Les données couvrent divers indicateurs de santé, emploi jusqu'au comportement météorologique.
 
-Ce projet dirigé selon une méthode agile vise à offrir une capacité de lecture de ces indicateurs.`,statut:"En cours / Staging",img:"/vitrine/appmap_screen.png",lien:""},{id:4,title:"Leadership Conscient",subtitle:"Le futur se co-conscruit dès aujourd'hui",description:`Travail réalisé pour un client.
+Ce projet dirigé selon une méthode agile vise à offrir une capacité de lecture de ces indicateurs.`,statut:"En cours / Staging",img:"/vitrine/appmap_screen.png",lien:"https://vps-954b32b8.vps.ovh.net/"},{id:4,title:"Leadership Conscient",subtitle:"Le futur se co-conscruit dès aujourd'hui",description:`Travail réalisé pour un client.
 
 Mise à jour de l'interface, des outils et librairies d'un site wordpress.
 
