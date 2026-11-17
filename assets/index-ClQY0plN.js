@@ -43,7 +43,7 @@ Entièrement fonctionnel, il est aux normes RGPD pour les mesures d'audience, co
 
 La base de donnée est incluse dans l'offre d'hébergement gratuite sur firebase .`,statut:"Production",img:"/vitrine/tn_hero.avif",lien:"https://tresors-nomade.web.app"},{id:2,title:"FluteCraft",subtitle:"Une page web pour fabriquer vous même la flûte de vos rêves",description:`Afin de créer des flûtes, j'ai décidé de creer un outil pour m'accompagner dans le processus.
 
-Cette page web en React.js aide à construire une gamme de notes personnalisée, guide l'utilisateur sur les étapes de frabrication, et propose 3 modeles de prediction de positions.
+Cette page web en React.js aide à construire une gamme de notes personnalisée, guide l'utilisateur sur les étapes de fabrication, et propose 3 modeles de prediction de positions.
 
 Des conseils et recommandations de modifications sont présents après chaque étape.`,statut:"Tests",img:"/vitrine/flutecraft_screen.png",lien:""},{id:3,title:"App Map",subtitle:"Un regroupement d'informations graphiques pour la france métropolitaine",description:`Une application web & mobile developpée en Typescript, React / Native et Go.
 
